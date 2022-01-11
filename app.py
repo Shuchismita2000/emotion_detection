@@ -53,9 +53,8 @@ if inp=='Input text':
         st.write(table)
         Emotion=[]
 if inp=='Input text file':
-    
-    if str(file.name) is not None:
-        file =st.file_uploader('Upload your text file',type=['txt','.docx'])
+    file =st.file_uploader('Upload your text file',type=['txt','.docx'])
+    if file is not None:
         if str(file.name).endswith('.txt'):
             a_file = open(str(file.name), "r")
             lines = a_file.read()
