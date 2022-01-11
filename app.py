@@ -54,44 +54,45 @@ if inp=='Input text':
         Emotion=[]
 if inp=='Input text file':
     file =st.file_uploader('Upload your text file',type=['txt','.docx'])
-    if str(file.name).endswith('.txt'):
-        a_file = open(str(file.name), "r")
-        lines = a_file.read()
-        list_of_lists = lines.splitlines()
-        a_file.close()
-    if str(file.name).endswith('.docx'):
-        list_of_lists=list(docx2txt.process(str(file.name)))
+    if str(file.name) is not None:
+        if str(file.name).endswith('.txt'):
+            a_file = open(str(file.name), "r")
+            lines = a_file.read()
+            list_of_lists = lines.splitlines()
+            a_file.close()
+        if str(file.name).endswith('.docx'):
+            list_of_lists=list(docx2txt.process(str(file.name)))
 
-    doc=''.join(list_of_lists)
-    plot_wordcloud(doc)
+        doc=''.join(list_of_lists)
+        plot_wordcloud(doc)
 
-    model = st.selectbox(
-        'Select your desire model for detect emotion of your text',
-        options=['Logistic', 'DecisionTree', 'RandomForest', 'AdaBoostClassifier', 'XGBClassifier', 'KNeighbors',
+        model = st.selectbox(
+            'Select your desire model for detect emotion of your text',
+            options=['Logistic', 'DecisionTree', 'RandomForest', 'AdaBoostClassifier', 'XGBClassifier', 'KNeighbors',
                  'naive_bayes', 'Gradientboost'],
-    )
-    detect = st.button('Detect')
-    compare = st.button('Compare All')
+        )
+        detect = st.button('Detect')
+        compare = st.button('Compare All')
 
-    index = {'Logistic': 0, 'DecisionTree': 1, 'RandomForest': 2, 'AdaBoostClassifier': 3, 'XGBClassifier': 4,
+        index = {'Logistic': 0, 'DecisionTree': 1, 'RandomForest': 2, 'AdaBoostClassifier': 3, 'XGBClassifier': 4,
              'KNeighbors': 5, 'naive_bayes': 6, 'Gradientboost': 7}
-    model_list = [lr_model, dtc, rfc, abc, xgb, knc, nv_model, gbc]
+        model_list = [lr_model, dtc, rfc, abc, xgb, knc, nv_model, gbc]
 
-    if detect:
-        i = index[model]
-        a = PredEmotion(list_of_lists, model_list[i])
-        st.write(a[0])
-    if compare:
-        Emotion = []
-        for i in model_list:
-            a = PredEmotion(list_of_lists, i)
-            Emotion.append(a)
-        df = {'CLASSIFIER': ['Logistic', 'DecisionTree', 'RandomForest', 'AdaBoostClassifier', 'XGBClassifier',
+        if detect:
+         i = index[model]
+         a = PredEmotion(list_of_lists, model_list[i])
+         st.write(a[0])
+        if compare:
+            Emotion = []
+            for i in model_list:
+                a = PredEmotion(list_of_lists, i)
+                Emotion.append(a)
+                df = {'CLASSIFIER': ['Logistic', 'DecisionTree', 'RandomForest', 'AdaBoostClassifier', 'XGBClassifier',
                              'KNeighbors', 'naive_bayes', 'Gradientboost'],
 
-              'Emotion': Extract_1(Emotion),
-              'Prediction Score': Extract_2(Emotion)}
-        table = pd.DataFrame(df)
+                'Emotion': Extract_1(Emotion),
+                'Prediction Score': Extract_2(Emotion)}
+            table = pd.DataFrame(df)
 
-        st.write(table)
-        Emotion = []
+            st.write(table)
+            Emotion = []
