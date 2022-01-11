@@ -1,0 +1,9 @@
+,CLASSIFIER,Emotion(I love coding very much),Prediction Score(I love coding very much),Emotion(You are so irritating),Prediction Score(You are so irritating),Emotion(He hates running all the day),Prediction Score(He hates running all the day)
+0,NAIVE BAYES,joy,0.792278,joy,0.538581,joy,0.944500
+1,LOGISTIC REGRESSION,joy,0.771071,sadness,0.302709,sadness,0.279075
+2,DECISION TREE,neutral,0.500000,surprise,1.000000,joy,1.000000
+3,RANDOM FOREST,neutral,0.447222,surprise,0.400000,joy,0.566667
+4,ADABOOST CLASSIFIER,joy,0.145825,joy,0.145825,joy,0.145825
+5,XGB CLASSIFIER,fear,0.998310,fear,0.998310,fear,0.998310
+6,GRADIENTBOOST CLASSIFIER,joy,0.383441,joy,0.319093,joy,0.425636
+7,KNEIGHBORS CLASSIFIER,neutral,0.600000,neutral,1.000000,neutral,0.800000
